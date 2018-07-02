@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from .models import Pizza, Topping
 
-Class PizzaSerializer(serializers.ModelSerializer):
-    Class Meta:
+class PizzaSerializer(serializers.ModelSerializer):
+    class Meta:
         model = Pizza
         fields = ('id', 'name', 'price')
 
 
-Class ToppingSerializer(serializers.ModelSerializer):
-    Class Meta:
+class ToppingSerializer(serializers.ModelSerializer):
+    class Meta:
         model = Topping
         fields = ('id', 'name', 'veg')
