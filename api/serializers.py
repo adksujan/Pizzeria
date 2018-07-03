@@ -1,16 +1,19 @@
 from rest_framework import serializers
 from .models import Pizza, Topping
 
-class PizzaSerializer(serializers.ModelSerializer):
+class PizzaSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='pizzadetails', read_only=True)
+
     class Meta:
         model = Pizza
-        fields = ('id', 'name', 'price')
+        fields = ('url','id', 'name', 'price')
 
 
-class ToppingSerializer(serializers.ModelSerializer):
+class ToppingSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='toppingdetails', read_only=True)
     class Meta:
         model = Topping
-        fields = ('id', 'name', 'veg')
+        fields = ('url', 'id', 'name', 'veg', 'stock')
 
 
 

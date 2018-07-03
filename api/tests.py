@@ -59,7 +59,7 @@ class ToppingTests(APITestCase):
         Make sure we can create topping object
         """
         url = reverse('topping')
-        data = {'name': 'spinat', 'veg':'true'}
+        data = {'name': 'spinat', 'veg':'true', 'stock':'5.0'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Topping.objects.count(), 1)
