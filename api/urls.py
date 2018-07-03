@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'topping/$', views.ToppingsList.as_view(), name='topping'),
     url(r'topping/(?P<pk>[0-9]+)/$', views.ToppingDetails.as_view(), name='toppingdetails'),
     url(r'pizzatype/(?P<pk>[0-9]+)/$', views.PizzaType.as_view(), name='pizzatype'),
+    url(r'menu/$', views.PizzaMenu.as_view(), name='pizzamenu'),
     # url(r'pizzad/(?P<pk>[0-9]+)/$', views.PizzaDetailView.as_view()),
 ]
 

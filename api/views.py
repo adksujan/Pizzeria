@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from api.models import Pizza, Topping
-from api.serializers import PizzaSerializer, ToppingSerializer, PizzaTypeSerializer
+from api.serializers import PizzaSerializer, ToppingSerializer, PizzaTypeSerializer, MenuSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -42,3 +42,11 @@ class PizzaType(generics.RetrieveAPIView):
     """
     queryset = Pizza.objects.all()
     serializer_class = PizzaTypeSerializer
+
+
+class PizzaMenu(generics.ListAPIView):
+    """
+    Shows all pizza details with Toppings
+    """
+    queryset = Pizza.objects.all()
+    serializer_class = MenuSerializer
