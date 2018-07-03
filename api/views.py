@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from api.models import Pizza, Topping
-from api.serializers import PizzaSerializer, ToppingSerializer
+from api.serializers import PizzaSerializer, ToppingSerializer, PizzaTypeSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -97,3 +97,19 @@ class ToppingDetails(APIView):
         topping = self.get_object(pk)
         topping.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class PizzaType(APIView):
+        """
+        Tells if the Pizza is vegeterian  with a given id
+        """
+        def get_object(self, pk):
+            try:
+                return Pizza.objects.get(pk=pk)
+            except Pizza.DoesNotExist:
+                raise Http404
+
+        def get(self, request, pk, format=None):
+            topping = self.get_object(pk)
+            serializer = PizzaTypeSerializer(topping)
+            return Response(serializer.data)

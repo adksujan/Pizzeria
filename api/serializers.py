@@ -11,3 +11,10 @@ class ToppingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topping
         fields = ('id', 'name', 'veg')
+
+
+
+class PizzaTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pizza
+        fields = ('id', 'is_veg')

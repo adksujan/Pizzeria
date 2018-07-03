@@ -14,3 +14,13 @@ class Pizza(models.Model):
 
     def __str__(self):
         return self.name
+
+    def is_veg(self):
+        """
+        checks if the pizza is veg or not
+        """
+        for x in self.toppings.all():
+            if not x.veg :
+                return False
+        return True
+        # return all([x.veg for x in self.toppings])
