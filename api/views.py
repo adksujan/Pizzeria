@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from django.http import Http404
 from api.serializers import PizzaSerializer, ToppingSerializer, PizzaTypeSerializer, MenuSerializer, AddToppingsSerializer
-
+from rest_framework import permissions
 
 class PizzaList(generics.ListCreateAPIView):
     """
@@ -46,8 +46,9 @@ class PizzaType(generics.RetrieveAPIView):
 
 class PizzaMenu(generics.ListAPIView):
     """
-    Shows all pizza details with Toppings
+    Shows all pizza details with Toppings, Read only access to any users
     """
+    permission_classes = (permissions.AllowAny,)
     queryset = Pizza.objects.all()
     serializer_class = MenuSerializer
 
