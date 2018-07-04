@@ -131,3 +131,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
