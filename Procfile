@@ -1,1 +1,1 @@
-+web: gunicorn Pizzeria.wsgi --log-file -
+web: gunicorn Pizzeria.wsgi
