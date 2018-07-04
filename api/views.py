@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from api.models import Pizza, Topping
-from api.serializers import PizzaSerializer, ToppingSerializer, PizzaTypeSerializer, MenuSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
 from django.http import Http404
+from api.serializers import PizzaSerializer, ToppingSerializer, PizzaTypeSerializer, MenuSerializer, AddToppingsSerializer
 
 
 class PizzaList(generics.ListCreateAPIView):
@@ -50,3 +50,11 @@ class PizzaMenu(generics.ListAPIView):
     """
     queryset = Pizza.objects.all()
     serializer_class = MenuSerializer
+
+
+class AddToppings(generics.UpdateAPIView):
+    """
+    Add toppings to pizza using array of Topping ids api/addtoppings/<pizza_id>
+    """
+    queryset = Pizza.objects.all()
+    serializer_class = AddToppingsSerializer

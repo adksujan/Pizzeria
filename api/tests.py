@@ -115,3 +115,20 @@ class PizzaTypeTest(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(json.loads(response.content).get('is_veg'), False)
+
+class AddToppingTest(APITestCase):
+    def test_addtoppings(self):
+        """
+        check if the array of toppings are added to a pizza
+        """
+        pizza = Pizza.objects.create(name="Veg Pizza", price="0.99")
+        spinat = Topping.objects.create(name="spinat", veg=True)
+        paprika = Topping.objects.create(name="paprika", veg=True)
+        url = reverse("addtoppings", kwargs={"pk": pizza.pk})
+        false_data = { 'toppings': [spinat.pk,paprika.pk,3]} # id 3 doesnot exist in topping
+        data = { "toppings": [spinat.pk,paprika.pk]}
+        response = self.client.put(url, data=false_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        response = self.client.put(url, data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(json.loads(response.content).get('toppings'), [spinat.pk,paprika.pk])
